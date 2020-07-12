@@ -1,0 +1,181 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>PBR-Net: Imitating Physically Based Rendering using Deep Neural Network</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+  </script>
+  
+<body>
+  <div class="container"> 
+    <span class="title">PBR-Net: Imitating Physically Based Rendering using Deep Neural Network</span>
+    <table border="0" align="center" class="authors">
+      <tr align="center">
+        <td><a href="">Peng Dai</a></td> 
+        <td><a href="https://scholar.google.com/citations?user=gIBLutQAAAAJ&hl=en">Zhuwen Li</a></td>
+        <td><a href="https://www.zhangyinda.com/">Yinda Zhang</a></td>
+        <td> <a href="http://www.liushuaicheng.org/">Shuaicheng Liu</a> </td>
+        <td> <a href="https://scholar.google.com/citations?user=s-kUGYQAAAAJ&hl=en">Bing Zeng</a> </td>
+      </tr>
+    </table>
+    <table border="0" align="center" class="affiliations">
+      <tr>
+        <td align="center"> University of Electronic Science and Technology of China</td>
+      </tr>
+      <tr>
+        <td align="center"> Google Research</td>
+      </tr>
+      <tr>
+        <td align="center"> Nuro.Inc</td>
+      </tr>  
+    </table>
+
+    <p>&nbsp;</p>
+    <table width="200" border="0" align="center">
+      <tr>
+        <td><img src="images/teaser.png" width="926" alt="" /><br /></td>
+      </tr>
+    </table>
+
+    <p>&nbsp;</p>
+    <span class="section">Abstract</span>
+    <p>
+      Physically based rendering has been widely used to
+      generate photo-realistic images, which greatly impacts industry
+      by providing appealing rendering, such as for entertainment and
+      augmented reality, and academia by serving large scale highfidelity
+      synthetic training data for data hungry methods like deep
+      learning. However, physically based rendering heavily relies on
+      ray-tracing, which can be computational expensive in complicated
+      environment and hard to parallelize. In this paper, we
+      propose an end-to-end deep learning based approach to generate
+      physically based rendering efficiently. Our system consists of two
+      stacked neural networks, which effectively simulates the physical
+      behavior of the rendering process and produces photo-realistic
+      images. The first network, namely shading network, is designed
+      to predict the optimal shading image from surface normal,
+      depth and illumination; the second network, namely composition
+      network, learns to combine the predicted shading image with the
+      reflectance to generate the final result. Our approach is inspired
+      by intrinsic image decomposition, and thus it is more physically
+      reasonable to have shading as intermediate supervision. Extensive
+      experiments show that our approach is robust to noise thanks to
+      a modified perceptual loss and even outperforms the physically
+      based rendering systems in complex scenes given a reasonable
+      time budget.
+      <br />
+    </p>
+    
+    <p>&nbsp;</p>
+    <p class="section">Documents</p>
+    <table border="0">
+      <tbody>
+        <tr>
+          <td><img src="images/paper.png" width="100" alt="" /></td>
+          <td>&nbsp;</td>
+          <td>
+            <p>&quot;PBR-Net: Imitating Physically Based Rendering using Deep Neural Network&quot;,<br/>
+              Peng Dai, Zhuwen Li, Yinda Zhang, Shuaicheng Liu, Bing Zeng<br/>
+              IEEE Transactions on Image Processing (TIP), 2020</p>
+            <p>
+              [<a href="http://www.liushuaicheng.org/TIP/PBR-Net/PBR-Net.pdf">paper</a>]
+              [<a href="">arxiv</a>]                     
+            </td>
+        </tr>
+      </tbody>
+    </table>
+    
+
+    <p class="section">&nbsp;</p>
+    <span class="section">Framework</span>
+    <table width="450" border="0" align="center">
+      <tbody>
+        <tr>
+          <p></p>
+          <td align="center"><img src="images/pipeline.png" height="450" alt="" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      <td class="caption"> Network architecture and workflow. Our network mainly consists of two sub-networks, i.e. shading network and composition network. Shading network
+        synthesizes shading image using surface normal, depth, panoramic illumination (distance and intensity) as inputs. Composition network combines the generated
+        shading image with the reflectance to produce a color image.
+      </td>
+    </p>
+
+    <p>&nbsp;</p>
+    <p class="section">Results</p>
+    <table width="200" border="0" align="center">
+      <tr>
+        <td><img src="images/U-Net.png" width="926" alt="" /><br /></td>
+      </tr>
+    </table>
+    <p align="center">(a)Transform directly using U-Net. (b)Shading images from PBR-Net. (c)Color images from PBR-Net. 
+      (d)Ground truth.</p>
+    <br/>
+    <p></p>
+    <p></p>
+    <table width="200" border="0" align="center">
+      <tr>
+        <td><img src="images/pbrs.png" width="926" alt="" /><br /></td>
+      </tr>
+      <tr>
+        <td class="caption"> </td>
+      </tr>
+    </table>
+    <p align="center">Test results on pbrs[1]. First and second columes are ground truth using mitsuba.
+      Third and fourth columes are predictions from PBR-Net.
+    </p>
+    
+    <p></p>
+    <br/>
+    <p></p>
+    <table width="200" border="0" align="center">
+      <tr>
+        <td><img src="images/community.png" width="926" alt="" /><br /></td>
+      </tr>
+    </table>
+    <p align="center">Test results on public avaiable models[2] after finetuning. The first and second rows are ground truth using mitsuba.
+      Third and fourth rows are predictions from PBR-Net. Note that the scene for test is excluded from the finetune set . </p>
+
+
+    <p>&nbsp;</p>
+    <p class="section">Discussion</p>
+    <p> 
+      (1) Due to the limitation of high quality models, the generated results have a gap with photo-realistic images.
+      In the future, with the development of inverse rendering and more public avaiable models. Eventually, the rendering results will go further. <br />   
+      (2) In this implementation, the panaromic illumination images only encode the transparent windows, doors 
+      and self-emmitting objects in one room as light sources. This approximation will impair the accurancy of lights. 
+      What's more, how to effectively insert the illumination information into network to better relight the scene is also a valuable direction in the furture, 
+      especifically for complex scenes.
+    </p>
+
+    <p>&nbsp;</p>
+    <p class="section">Reference</p>
+    <p>
+      [1] Y. Zhang, S. Song, E. Yumer, M. Savva, J.-Y. Lee, H. Jin, and
+      T. Funkhouser, “Physically-based rendering for indoor scene understanding
+      using convolutional neural networks,” in IEEE Conference
+      on Computer Vision and Pattern Recognition, 2017, pp. 5057–5065. <br /> 
+      [2] B. Bitterli, “Rendering resources,” 2016, https://benediktbitterli.me/resources/.
+    </p>
+    
+
+    <p class="section">&nbsp;</p>
+    <p align="center" class="date">Last updated: July 2020</p>
+  </div>
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+  tex2jax: {inlineMath: [['$','$']]}
+  });
+  </script>
+</body>
+
+</html>
